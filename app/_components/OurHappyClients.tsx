@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -47,26 +47,42 @@ const testimonials = [
 
 export default function OurHappyClients() {
   const [current, setCurrent] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
+
+  useEffect(() => {
+    const updateVisibleCards = () => {
+      if (window.innerWidth < 640) setVisibleCards(1);
+      else if (window.innerWidth < 1024) setVisibleCards(2);
+      else setVisibleCards(3);
+    };
+    updateVisibleCards();
+    window.addEventListener("resize", updateVisibleCards);
+    return () => window.removeEventListener("resize", updateVisibleCards);
+  }, []);
 
   const nextSlide = () =>
-    setCurrent((prev) => (prev + 1 >= testimonials.length - 2 ? 0 : prev + 1));
+    setCurrent((prev) =>
+      prev + 1 >= testimonials.length - visibleCards + 1 ? 0 : prev + 1
+    );
 
   const prevSlide = () =>
-    setCurrent((prev) => (prev === 0 ? testimonials.length - 3 : prev - 1));
+    setCurrent((prev) =>
+      prev === 0 ? testimonials.length - visibleCards : prev - 1
+    );
 
   return (
-    <section className="w-full max-w-7xl mx-auto mt-16 px-6 relative z-10">
-      <div className="flex items-center justify-between mb-12">
+    <section className="w-full max-w-7xl mx-auto mt-16 px-4 sm:px-6 relative z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-6">
         <div>
-          <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-3">
+          <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-2">
             OUR HAPPY CLIENTS
           </h2>
-          <p className="text-[#cfd8ed] text-base">
+          <p className="text-[#cfd8ed] text-sm sm:text-base">
             Dummy ipsum dolor sit amet, consectetur adipiscing elit
           </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 self-end sm:self-auto">
           <button
             onClick={prevSlide}
             className="bg-[#1d1f3b] p-3 rounded-full shadow-lg hover:bg-[#2b2e52] transition"
@@ -85,16 +101,19 @@ export default function OurHappyClients() {
       <div className="overflow-hidden">
         <div
           className="flex gap-6 transition-transform duration-500"
-          style={{ transform: `translateX(-${current * (100 / 3)}%)` }}
+          style={{
+            transform: `translateX(-${current * (100 / visibleCards)}%)`,
+          }}
         >
           {testimonials.map((item, idx) => (
             <div
               key={idx}
-              className="rounded-2xl border border-[#2f325a] bg-transparent p-8 flex flex-col justify-between w-[calc(100%/3-1rem)] flex-shrink-0"
+              className="rounded-2xl border border-[#2f325a] bg-transparent p-6 sm:p-8 flex flex-col justify-between flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
-              <p className="text-[#cfd8ed] text-sm mb-6 leading-relaxed italic font-bold">
+              <p className="text-[#cfd8ed] text-sm sm:text-base mb-6 leading-relaxed italic font-bold">
                 “{item.text}”
               </p>
+
               <div>
                 <div className="flex flex-col items-end">
                   <h4 className="text-white font-semibold text-lg">
@@ -102,6 +121,7 @@ export default function OurHappyClients() {
                   </h4>
                   <p className="text-[#8ea0d1] text-sm mb-4">{item.role}</p>
                 </div>
+
                 <div className="flex flex-row items-center justify-between border-t border-[#22244d] py-6">
                   <div className="flex flex-col gap-1 text-xs text-[#a3b3d9]">
                     <span>Star Rating - {item.rating}</span>
@@ -109,10 +129,7 @@ export default function OurHappyClients() {
                     <span>Country - {item.country}</span>
                   </div>
                   <div>
-                    <span
-                      className="brand-logo font-bold text-white text-sm tracking-tight"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <span className="font-bold text-white text-sm tracking-tight">
                       {item.brand}
                     </span>
                   </div>
