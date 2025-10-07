@@ -1,15 +1,20 @@
 import Image from "next/image";
+import OurHappyClients from "./_components/OurHappyClients";
+import SuccessStories from "./_components/SuccessStories";
+import ProductEngineering from "./_components/ProductEngineering";
+import InnovativeTech from "./_components/InnovativeTech";
+import FeaturedInsights from "./_components/FeaturedInsights";
+import ContactUs from "./_components/ContactUs";
 
 export default function Home() {
   return (
     <div
-      className="min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-8 pb-20 relative"
+      className="w-full flex flex-col items-center justify-center overflow-hidden px-8 pb-20 relative"
       style={{
-        backgroundImage: "url(/background.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100vh",
+        backgroundImage: "url(/background7.jpg)",
+        backgroundRepeat: "repeat-y",
+        backgroundPosition: "top center",
+        backgroundSize: "auto",
       }}
     >
       <main className="flex flex-col gap-10 items-center max-w-3xl w-full z-10">
@@ -59,7 +64,7 @@ export default function Home() {
         </div>
       </main>
 
-      <div className="absolute left-0 right-0 bottom-0 py-7 border-t border-[#22244d] flex flex-wrap justify-center items-center bg-transparent gap-6">
+      <div className="py-7 border-t border-[#22244d] flex flex-wrap justify-between items-center bg-transparent gap-6 w-full max-w-7xl mx-auto ">
         <span
           className="brand-logo font-bold text-white text-lg tracking-tight"
           style={{ fontFamily: "sans-serif" }}
@@ -103,6 +108,12 @@ export default function Home() {
           Modernize
         </span>
       </div>
+      <ProductEngineering />
+      <OurHappyClients />
+      <SuccessStories />
+      <InnovativeTech />
+      <FeaturedInsights />
+      <ContactUs />
     </div>
   );
 }
