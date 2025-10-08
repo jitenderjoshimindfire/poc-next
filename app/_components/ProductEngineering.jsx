@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 
 export default function ProductEngineering() {
   const services = [
@@ -48,23 +49,56 @@ export default function ProductEngineering() {
     },
   ];
 
-  return (
-    <section className="w-full max-w-7xl mx-auto mt-12 flex flex-col gap-8 z-10 border-t border-[#22244d] py-10 px-6">
-      <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-2">
-        PRODUCT ENGINEERING
-      </h2>
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: i * 0.15,
+      },
+    }),
+    exit: { opacity: 0, y: 40, scale: 0.95, transition: { duration: 0.3 } },
+  };
 
-      <div className="text-[#cfd8ed] max-w-3xl text-base font-medium mb-6">
+  return (
+    <section className="w-full max-w-7xl mx-auto mt-12 flex flex-col gap-8 z-10 border-t border-[#22244d] py-10 px-6 overflow-hidden">
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-2"
+      >
+        PRODUCT ENGINEERING
+      </motion.h2>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-[#cfd8ed] max-w-3xl text-base font-medium mb-6"
+      >
         Discover the impact of bespoke digital solutions tailored precisely to
         your business’s distinct requirements. Our experienced team of
         professionals ensures you receive outstanding results that consistently
         exceed your expectations.
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {services.map((service, idx) => (
-          <div
+          <motion.div
             key={idx}
+            custom={idx}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            exit="exit"
+            viewport={{ once: false, amount: 0.3 }} // animate in & out
             className="rounded-2xl p-6 flex flex-col justify-between shadow-lg transition-transform hover:scale-[1.02]"
             style={{ backgroundColor: service.bg }}
           >
@@ -97,7 +131,7 @@ export default function ProductEngineering() {
             >
               {service.btnText}
             </button>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

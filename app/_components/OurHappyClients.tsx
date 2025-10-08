@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -48,6 +49,19 @@ const testimonials = [
 export default function OurHappyClients() {
   const [current, setCurrent] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [constraints, setConstraints] = useState({ left: 0, right: 0 });
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      const width = carouselRef.current.offsetWidth;
+      setConstraints({
+        left: -((testimonials.length - visibleCards) * width) / visibleCards,
+        right: 0,
+      });
+    }
+  }, [visibleCards]);
 
   useEffect(() => {
     const updateVisibleCards = () => {
@@ -83,62 +97,100 @@ export default function OurHappyClients() {
         </div>
 
         <div className="flex gap-3 self-end sm:self-auto">
-          <button
+          <motion.button
             onClick={prevSlide}
-            className="bg-[#1d1f3b] p-3 rounded-full shadow-lg hover:bg-[#2b2e52] transition"
+            whileHover={{ scale: 1.2, backgroundColor: "#2b2e52" }}
+            className="bg-[#1d1f3b] p-3 rounded-full shadow-lg transition-colors"
           >
             <ChevronLeft className="text-white w-5 h-5" />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={nextSlide}
-            className="bg-[#1d1f3b] p-3 rounded-full shadow-lg hover:bg-[#2b2e52] transition"
+            whileHover={{ scale: 1.2, backgroundColor: "#2b2e52" }}
+            className="bg-[#1d1f3b] p-3 rounded-full shadow-lg transition-colors"
           >
             <ChevronRight className="text-white w-5 h-5" />
-          </button>
+          </motion.button>
         </div>
       </div>
 
-      <div className="overflow-hidden">
-        <div
-          className="flex gap-6 transition-transform duration-500"
-          style={{
-            transform: `translateX(-${current * (100 / visibleCards)}%)`,
-          }}
+      <motion.div
+        ref={carouselRef}
+        className="overflow-hidden cursor-grab"
+        drag="x"
+        dragConstraints={constraints}
+        dragElastic={0.1}
+      >
+        <motion.div
+          className="flex gap-6"
+          animate={{ x: -current * (100 / visibleCards) + "%" }}
+          transition={{ type: "spring", stiffness: 200, damping: 30 }}
         >
           {testimonials.map((item, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="rounded-2xl border border-[#2f325a] bg-transparent p-6 sm:p-8 flex flex-col justify-between flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+              onHoverStart={() => setHoveredCard(idx)}
+              onHoverEnd={() => setHoveredCard(null)}
+              className="rounded-2xl border border-[#2f325a] bg-transparent p-6 sm:p-8 flex flex-col justify-between flex-shrink-0"
+              style={{
+                width:
+                  visibleCards === 1
+                    ? "100%"
+                    : visibleCards === 2
+                    ? "calc(50% - 0.75rem)"
+                    : "calc(33.333% - 1rem)",
+              }}
+              animate={{
+                scale: hoveredCard === idx ? 1.05 : 1,
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              <p className="text-[#cfd8ed] text-sm sm:text-base mb-6 leading-relaxed italic font-bold">
+              <motion.p
+                className="text-sm sm:text-base mb-6 leading-relaxed italic font-bold"
+                animate={{ color: hoveredCard === idx ? "#b6ff92" : "#cfd8ed" }}
+                transition={{ duration: 0.2 }}
+              >
                 “{item.text}”
-              </p>
+              </motion.p>
 
-              <div>
-                <div className="flex flex-col items-end">
-                  <h4 className="text-white font-semibold text-lg">
-                    {item.name}
-                  </h4>
-                  <p className="text-[#8ea0d1] text-sm mb-4">{item.role}</p>
-                </div>
-
-                <div className="flex flex-row items-center justify-between border-t border-[#22244d] py-6">
-                  <div className="flex flex-col gap-1 text-xs text-[#a3b3d9]">
-                    <span>Star Rating - {item.rating}</span>
-                    <span>Project - {item.project}</span>
-                    <span>Country - {item.country}</span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-white text-sm tracking-tight">
-                      {item.brand}
-                    </span>
-                  </div>
-                </div>
+              <div className="flex flex-col items-end mb-4">
+                <motion.h4
+                  className="font-semibold text-lg"
+                  animate={{ color: hoveredCard === idx ? "#b6ff92" : "#ffffff" }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.name}
+                </motion.h4>
+                <motion.p
+                  className="text-sm"
+                  animate={{ color: hoveredCard === idx ? "#b6ff92" : "#8ea0d1" }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.role}
+                </motion.p>
               </div>
-            </div>
+
+              <div className="flex flex-row items-center justify-between border-t border-[#22244d] py-6">
+                <motion.div
+                  className="flex flex-col gap-1 text-xs"
+                  animate={{ color: hoveredCard === idx ? "#b6ff92" : "#a3b3d9" }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span>Star Rating - {item.rating}</span>
+                  <span>Project - {item.project}</span>
+                  <span>Country - {item.country}</span>
+                </motion.div>
+                <motion.div
+                  animate={{ color: hoveredCard === idx ? "#b6ff92" : "#ffffff" }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span className="font-bold text-sm tracking-tight">{item.brand}</span>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
