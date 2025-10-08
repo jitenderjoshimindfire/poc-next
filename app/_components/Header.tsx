@@ -16,7 +16,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full px-6 py-3 flex items-center justify-between border-b border-[#312993] shadow-[0_0_9px_0_rgba(53,41,186,0.3)] bg-[#0f0f2e] relative">
+    <header className="fixed top-0 left-0 w-full z-50 px-6 py-3 flex items-center justify-between border-b border-[#312993] shadow-[0_0_9px_0_rgba(53,41,186,0.3)] bg-[#28282B] backdrop-blur-sm">
       <div className="flex items-center gap-4 min-w-[180px]">
         <Image src="/favicon.ico" alt="Chromezy" width={32} height={32} />
         <span className="text-white font-bold text-[1.1rem]">Chromezy</span>

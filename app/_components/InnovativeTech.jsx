@@ -6,61 +6,149 @@ export default function InnovativeTechno() {
       number: "01",
       title: "Web App Development",
       technologies: [
-        "React",
-        "Node",
-        "Angular",
-        "Vue",
-        "ExpressJS",
-        "AdobeXD",
-        "Figma",
-        "Whimsical",
+        {
+          name: "React",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+        },
+        {
+          name: "Node",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg",
+        },
+        {
+          name: "Angular",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/3/39/Angular_logo_2022.svg",
+        },
+        {
+          name: "Vue",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg",
+        },
+        {
+          name: "ExpressJS",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg",
+        },
+        {
+          name: "AdobeXD",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Adobe_XD_CC_icon.svg",
+        },
+        {
+          name: "Figma",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg",
+        },
+        {
+          name: "Whimsical",
+          icon: "https://assets.whimsical.com/favicon/favicon-32x32.png",
+        },
       ],
     },
     {
       number: "02",
       title: "Mobile App Development",
       technologies: [
-        "Flutter",
-        "Kotlin",
-        "Swift",
-        "React Native",
-        "AdobeXD",
-        "Figma",
+        {
+          name: "Flutter",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png",
+        },
+        {
+          name: "Kotlin",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png",
+        },
+        {
+          name: "Swift",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Swift_logo.svg",
+        },
+        {
+          name: "React Native",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+        },
+        {
+          name: "AdobeXD",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Adobe_XD_CC_icon.svg",
+        },
+        {
+          name: "Figma",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg",
+        },
       ],
     },
     {
       number: "03",
       title: "E-commerce",
-      technologies: ["Shopify", "WooCommerce", "Prestashop"],
+      technologies: [
+        {
+          name: "Shopify",
+          icon: "https://cdn.shopify.com/static/shopify-favicon.png",
+        },
+        {
+          name: "WooCommerce",
+          icon: "https://logo.svgcdn.com/l/woocommerce-icon.svg",
+        },
+        {
+          name: "Prestashop",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/a/ad/PrestaShop_Logo.svg",
+        },
+      ],
     },
     {
       number: "04",
       title: "Analytics",
       technologies: [
-        "Python",
-        "PowerBi",
-        "Tableau",
-        "Amazon QuickSight",
-        "Apache Spark",
+        {
+          name: "Python",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+        },
+        {
+          name: "PowerBi",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg",
+        },
+        {
+          name: "Tableau",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Tableau_Logo.png",
+        },
+        {
+          name: "Amazon QuickSight",
+          icon: "https://quicksight.aws.amazon.com/favicon.ico",
+        },
+        {
+          name: "Apache Spark",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg",
+        },
       ],
     },
     {
       number: "05",
       title: "Data & Cloud",
       technologies: [
-        "Azure",
-        "AWS",
-        "Docker",
-        "Kubernetes",
-        "Google Cloud",
-        "Ola Krutrim",
+        {
+          name: "Azure",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg",
+        },
+        {
+          name: "AWS",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
+        },
+        {
+          name: "Docker",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg",
+        },
+        {
+          name: "Kubernetes",
+          icon: "https://logo.svgcdn.com/l/kubernetes.svg",
+        },
+        {
+          name: "Google Cloud",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/5/57/Google_Cloud_logo.svg",
+        },
+        {
+          name: "Ola Krutrim",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg",
+        },
       ],
     },
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row my-20 lg:my-40 px-4 sm:px-6 gap-12">
-      <section className="flex flex-col items-center text-center lg:text-left gap-10 py-10 px-6 border border-white/20 rounded-3xl lg:max-w-xl bg-white/5">
+    <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row my-20 lg:my-40 px-4 sm:px-6 gap-20">
+      <section className="flex flex-col items-center text-center lg:text-left gap-10 py-10 px-6 border border-white/20 rounded-3xl lg:max-w-md w-full bg-white/5">
         <div className="flex-1">
           <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white mb-5 leading-tight">
             INNOVATIVE TECHNOLOGIES KEEPING US AHEAD
@@ -70,24 +158,23 @@ export default function InnovativeTechno() {
             to your business's distinct requirements.
           </p>
         </div>
-
         <div className="flex-1 w-full">
-          <div className="w-full h-52 sm:h-64 md:h-72 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl border border-blue-400/30 flex items-center justify-center">
-            <div className="text-white/70 text-center">
-              <div className="text-3xl sm:text-4xl mb-2">🚀</div>
-              <div className="text-sm sm:text-base">
-                Technology Illustration
-              </div>
-            </div>
+          <div className="w-full h-52 sm:h-64 md:h-72 bg-transparent rounded-2xl flex items-center justify-center">
+            <img
+              src="/innovate.png" 
+              alt="Technology Illustration"
+              className="w-full h-full object-contain opacity-80"
+              style={{ mixBlendMode: "lighten" }}
+            />
           </div>
         </div>
       </section>
 
       <section className="flex-1 py-10 px-4 sm:px-6">
         <div className="flex flex-col gap-6 sm:gap-8">
-          {techSections.map((section, index) => (
+          {techSections.map((section) => (
             <div
-              key={index}
+              key={section.number}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 group hover:bg-white/5 p-5 sm:p-6 rounded-2xl transition-all"
             >
               <div className="flex-shrink-0 flex justify-center sm:justify-start">
@@ -104,12 +191,25 @@ export default function InnovativeTechno() {
                 </h3>
 
                 <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                  {section.technologies.map((tech, techIndex) => (
+                  {section.technologies.map((tech, idx) => (
                     <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-white/10 rounded-full text-[#cfd8ed] text-xs sm:text-sm border border-white/10"
+                      key={idx}
+                      className="px-3 py-1 bg-white/10 rounded-full text-[#cfd8ed] text-xs sm:text-sm border border-white/10 flex items-center gap-2"
                     >
-                      {tech}
+                      <img
+                        src={tech.icon}
+                        alt={`${tech.name} logo`}
+                        className="w-4 h-4 sm:w-5 sm:h-5 mr-1"
+                        loading="lazy"
+                        style={{
+                          minWidth: "16px",
+                          minHeight: "16px",
+                          background: "transparent",
+                          borderRadius: "2px",
+                        }}
+                        onError={(e) => (e.target.style.display = "none")}
+                      />
+                      {tech.name}
                     </span>
                   ))}
                 </div>

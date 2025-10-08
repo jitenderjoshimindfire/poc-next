@@ -1,13 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import { Phone, Mail, ChevronDown } from "lucide-react";
-
 const IllustrationPlaceholder = () => (
   <div className="relative w-full h-56 sm:h-72 md:h-80 flex justify-center items-end">
     <div
       className="absolute top-1/4 w-32 sm:w-40 md:w-44 h-32 sm:h-40 md:h-44 rounded-full bg-blue-500/50 shadow-xl overflow-hidden flex justify-center items-center"
       style={{ zIndex: 5, transform: "translateY(-10px)" }}
-    ></div>
+    >
+      <img
+        src="avatar.jpg"
+        alt="Avatar"
+        className="w-full h-full object-cover"
+      />
+    </div>
   </div>
 );
 

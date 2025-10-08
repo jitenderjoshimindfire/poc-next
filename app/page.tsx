@@ -9,13 +9,7 @@ import ContactUs from "./_components/ContactUs";
 export default function Home() {
   return (
     <div
-      className="w-full flex flex-col items-center justify-center overflow-hidden px-8 pb-20 relative"
-      style={{
-        backgroundImage: "url(/background7.jpg)",
-        backgroundRepeat: "repeat-y",
-        backgroundPosition: "top center",
-        backgroundSize: "auto",
-      }}
+      className="w-full flex flex-col items-center justify-center overflow-hidden px-8 pb-20 relative bg-slate-900"
     >
       <main className="flex flex-col gap-10 items-center max-w-3xl w-full z-10">
         <div className="text-sm text-[#A3B3D9] font-medium tracking-wide mt-10 mb-4 flex items-center gap-2">
