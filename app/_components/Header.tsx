@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 
 const navLinks = [
   { name: "Home", active: true },
@@ -20,6 +20,14 @@ export default function Header() {
       <div className="flex items-center gap-4 min-w-[180px]">
         <Image src="/favicon.ico" alt="Chromezy" width={32} height={32} />
         <span className="text-white font-bold text-[1.1rem]">Chromezy</span>
+      </div>
+     <div className="hidden md:flex items-center bg-[#28282B] rounded-full px-3 py-1 w-[100px] ">
+        <Search size={16} className="text-[#b2b8cc] flex-shrink-0 g-2" />
+        <input
+          type="text"
+          placeholder="Search"
+          className="bg-transparent outline-none border-none text-[#b2b8cc] text-sm placeholder-[#b2b8cc] flex-1 py-1"
+        />
       </div>
 
       <nav className="hidden md:flex flex-1 justify-center items-center">

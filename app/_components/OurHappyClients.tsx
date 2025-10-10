@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 const testimonials = [
   {
@@ -48,7 +48,16 @@ const testimonials = [
 export default function OurHappyClients() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [visibleCards, setVisibleCards] = useState(3);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  const isInView = useInView(sectionRef, { amount: 0.3, once: false });
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
 
   useEffect(() => {
     const updateVisibleCards = () => {
@@ -66,7 +75,10 @@ export default function OurHappyClients() {
     carouselRef.current.scrollWidth > carouselRef.current.offsetWidth;
 
   return (
-    <section className="w-full max-w-7xl mx-auto mt-16 px-4 sm:px-6 relative z-10">
+    <section
+      ref={sectionRef}
+      className="w-full max-w-7xl mx-auto mt-16 px-4 sm:px-6 relative z-10 overflow-hidden"
+    >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-6">
         <div>
           <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-2">
@@ -81,14 +93,17 @@ export default function OurHappyClients() {
       <motion.div
         ref={carouselRef}
         className="flex gap-6 overflow-x-auto cursor-grab py-4"
+        style={{
+          x,
+          opacity: isInView ? 1 : 0,
+          transition: "opacity 0.6s ease-out",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
         drag={isDragEnabled ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.1}
         whileTap={{ cursor: "grabbing" }}
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
       >
         {testimonials.map((item, idx) => (
           <motion.div
@@ -104,8 +119,10 @@ export default function OurHappyClients() {
                   ? "calc(50% - 0.75rem)"
                   : "calc(33.333% - 1rem)",
             }}
-            animate={{ scale: hoveredCard === idx ? 1.05 : 1 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.5, y: 60 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            whileHover={{ scale: 1.05 }}
           >
             <motion.p
               className="text-sm sm:text-base mb-6 leading-relaxed italic font-bold"
