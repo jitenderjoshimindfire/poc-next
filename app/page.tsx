@@ -21,7 +21,7 @@ export default function Home() {
     [0, 0.5, 1],
     ["70vh", "10vh", "75vh"]
   );
-  const sphereY = useTransform(sphereYBase, (v) => `calc(${v} - 170px)`);
+  const sphereY = useTransform(sphereYBase, (v) => `calc(${v} - 290px)`);
 
   const sphereOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 0.9, 0]);
 

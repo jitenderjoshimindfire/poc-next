@@ -1,19 +1,34 @@
 "use client";
 import React, { useState } from "react";
 import { Phone, Mail, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+
 const IllustrationPlaceholder = () => (
-  <div className="relative w-full h-56 sm:h-72 md:h-80 flex justify-center items-end">
-    <div
+  <motion.div
+    className="relative w-full h-56 sm:h-72 md:h-80 flex justify-center items-end"
+    initial={{ scale: 0, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ type: "spring", stiffness: 120, damping: 15 }}
+  >
+    <motion.div
       className="absolute top-1/4 w-32 sm:w-40 md:w-44 h-32 sm:h-40 md:h-44 rounded-full bg-blue-500/50 shadow-xl overflow-hidden flex justify-center items-center"
       style={{ zIndex: 5, transform: "translateY(-10px)" }}
+      animate={{
+        y: [0, -10, 0],
+      }}
+      transition={{
+        repeat: Infinity,
+        duration: 3,
+        ease: "easeInOut",
+      }}
     >
       <img
         src="avatar.jpg"
         alt="Avatar"
         className="w-full h-full object-cover"
       />
-    </div>
-  </div>
+    </motion.div>
+  </motion.div>
 );
 
 const ContactUs = () => {
@@ -25,9 +40,8 @@ const ContactUs = () => {
     message: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +77,14 @@ const ContactUs = () => {
   );
 
   return (
-    <div className="w-full max-w-6xl mx-auto rounded-[3rem] shadow-2xl overflow-hidden bg-white/10 p-2">
+    <motion.div
+      className="w-full max-w-6xl mx-auto rounded-[3rem] shadow-2xl overflow-hidden bg-white/10 p-2"
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -100 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
       <div className="flex flex-col lg:flex-row bg-white rounded-[2.8rem] min-h-[600px]">
         <div
           className="w-full lg:w-7/10 p-6 sm:p-8 md:p-12 flex flex-col justify-between text-white rounded-t-[2.8rem] lg:rounded-l-[2.8rem] lg:rounded-tr-none relative overflow-hidden z-10"
@@ -78,7 +99,12 @@ const ContactUs = () => {
           <div className="relative z-10 flex flex-col items-center text-center">
             <IllustrationPlaceholder />
 
-            <div className="mt-[-30px] mb-10">
+            <motion.div
+              className="mt-[-30px] mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
                 CONTACT US
               </h1>
@@ -86,9 +112,14 @@ const ContactUs = () => {
                 Talk with us to know how we can make you a part of a thriving
                 digital landscape.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="max-w-xs mx-auto w-full mb-4">
+            <motion.div
+              className="max-w-xs mx-auto w-full mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <div className="p-5 sm:p-6 rounded-xl shadow-lg bg-green-600 text-white">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
@@ -100,9 +131,7 @@ const ContactUs = () => {
                       +1 315 308 0901
                     </span>
                   </div>
-
                   <div className="border-t border-white/40 my-2"></div>
-
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <Mail className="w-5 h-5" />
@@ -117,11 +146,17 @@ const ContactUs = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        <div className="w-full lg:w-3/10 flex justify-center items-center p-6 sm:p-8 lg:p-0">
+        <motion.div
+          className="w-full lg:w-3/10 flex justify-center items-center p-6 sm:p-8 lg:p-0"
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+          viewport={{ once: true }}
+        >
           <div className="w-full lg:w-[140%] p-6 sm:p-8 bg-blue-100 rounded-[2.5rem] shadow-2xl relative z-30 lg:-ml-[45%]">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
               Let's Talk!
@@ -171,9 +206,9 @@ const ContactUs = () => {
               </div>
             </form>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
